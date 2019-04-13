@@ -53,15 +53,19 @@ def madLib():
  for i in words:
    wordsInList.append(i)
  #print wordsInList
- print cleanUpList(wordsInList)
- 
+ #print(cleanUpList(wordsInList))
+ newList = cleanUpList(wordsInList)
+ print (newList) #cleaned Up list
+ #print (newList[0:11]) #first word
+ indexOfWordsToRemove = [] #contains int position of first letter of word to be removed
  #once cleaned up, remove words and record their index
  #collect list of words from user
  #print results
  
 def cleanUpList(list):
-  return str(list).replace('[','').replace(']','').replace(',','').replace('\'','').replace(r'\n','\n')
+  return str(list).replace('[','').replace(']','').replace(', ',' ').replace('\'','').replace(r'\n','\n')
   # cleans up text, yet removes ',' char from phrasing and words.
+  #removes: [],' and handles \n
  
 
     
