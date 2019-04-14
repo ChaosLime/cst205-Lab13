@@ -2,40 +2,35 @@
 #Nicholas Saunders
 #Mitchell Saunders
 
-###########################BELOW IS EXACT CODE FROM LAB 12 ##################
 
-## CST 205 - Lab 12
-## Team #9 S.C.E.S.
-## Team Members:
-## Austin Ah Loo
-## Mikie Reed
-## Mitchell Saunders
-## Nicholas Saunders
-## Ramon Lucindo
-
-#             Map of home
-#                  N
-#                W + E
-#                  S
-#  |--------------------------------|
-#  |               |                |
-#  |Dining Room #5 _   Bed Room #4  |
-#  |               |                |
-#  |------- |------|-------- |------|
-#  |               | Living Room #2 |
-#  |  Kitchen # 3  _                |
-#  |               |-------- |------|
-#  |               |  Mud Room #1   |
-#  |----------------------|  |------|
 GAMERUNNING = True #global variable gives the ability to allow other functions
-                   #to terminate game
+              #to terminate game
+###new                 
+USERNAME = []
+###
 
 # driver
 def game():#---------------------------------------------------------------------------------------------------
+  global USERNAME
+########################################## new
+  infoPrompt = "Welcome to our game text adventure!\n" +\
+              "To play this game, you need to read the instructions given and type in a 'Valid' command ;)\n"
+              
+  showInformation(infoPrompt)
+
+  userName = requestString("What do you like to be called by?")# used in the win/lose prompts
+  if len(USERNAME) == 0:
+    USERNAME.append(userName)
+  else:
+    USERNAME[0] = userName
+  
+  #also see win() for further edits
+
+#############################################
   #by default, player starts in room 1
   global GAMERUNNING
   roomIn = 1
-
+  
   printNow(welcomeMsg(roomIn))
   printNow(roomDescription(roomIn))
 
@@ -48,7 +43,9 @@ def game():#--------------------------------------------------------------------
   #key is to open a hidden trap door into the room with a monster but also the place to exit
 
   while GAMERUNNING:
-    userCmd = requestString("What do you want to do next?\nType 'Help' for commands.")
+  ###new
+    userCmd = requestString("What do you want to do next " + str(USERNAME[0])+ "?\nType 'Help' for commands.")
+  ### 
     printNow(userCmd)
     if len(userCmd) > 0:
       userCmd = userCmd.lower()
@@ -320,9 +317,17 @@ def win(didWin):
   global GAMERUNNING
 
   if(didWin):
-    printNow("Congratulations! You win the game!")
+  ###new
+    winPrompt = "Congratuations, " + str(USERNAME[0]) + " you win the game!"
+    showInformation(winPrompt)
+  ###  
+    #printNow("Congratulations! You win the game!")
   else:
-    printNow("You were killed by a monster, sorry, you lose the game, try again.")
+  ###new
+    losePrompt = "You were killed by a monster, " + str(USERNAME[0]) + " you lose the game :("
+    showInformation(losePrompt)
+  ###new
+    #printNow("You were killed by a monster, sorry, you lose the game, try again.")
 
   GAMERUNNING = False
 
